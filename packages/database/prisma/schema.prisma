@@ -1,0 +1,273 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  phone        String?
+  passwordHash String?
+  role         String    @default("CUSTOMER") // SUPERADMIN, STAFF, STORE_ADMIN, HUB_OPERATOR, DELIVERY_EXECUTIVE, TRUCK_DRIVER, CUSTOMER
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  stores              Store[]              @relation("StoreOwner")
+  orders              Order[]              @relation("CustomerOrders")
+  assignedShipments   Shipment[]           @relation("DeliveryExecutiveShipments")
+  assignedTripSheets  TripSheet[]          @relation("DriverTripSheets")
+}
+
+model Store {
+  id            String    @id @default(cuid())
+  name          String
+  slug          String    @unique
+  domain        String?   @unique
+  description   String?
+  ownerId       String
+  owner         User      @relation("StoreOwner", fields: [ownerId], references: [id])
+  status        String    @default("PENDING_KYC") // PENDING_KYC, ACTIVE, SUSPENDED, DISABLED
+  kycStatus     String    @default("NOT_SUBMITTED") // NOT_SUBMITTED, SUBMITTED, APPROVED, REJECTED
+  fssaiNumber   String?
+  udyamNumber   String?
+  gstin         String?
+  pickupEnabled Boolean   @default(false)
+  addressLine1  String
+  addressLine2  String?
+  city          String
+  state         String
+  pincode       String
+  contactEmail  String
+  contactPhone  String
+  rating        Float     @default(5.0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  kycDoc         StoreKYC?
+  products       Product[]
+  orders         Order[]
+  returns        ReturnRequest[]
+}
+
+model StoreKYC {
+  id                     String    @id @default(cuid())
+  storeId                String    @unique
+  store                  Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  fssaiNumber            String
+  fssaiCertificateUrl    String?
+  udyamNumber            String
+  udyamCertificateUrl    String?
+  gstin                  String?
+  panNumber              String
+  bankAccountNumber      String
+  bankIfscCode           String
+  bankAccountHolder      String
+  bankCancelledChequeUrl String?
+  adminNotes             String?
+  status                 String    @default("SUBMITTED") // SUBMITTED, APPROVED, REJECTED
+  reviewedAt             DateTime?
+  reviewedBy             String?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+}
+
+model Product {
+  id                         String    @id @default(cuid())
+  storeId                    String
+  store                      Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  name                       String
+  slug                       String
+  description                String
+  category                   String    // MANGOES, CASHEWS, KOKUM_PRODUCTS, etc.
+  imagesJson                 String    // JSON array of image URLs
+  mrp                        Float
+  price                      Float
+  sku                        String    @unique
+  stock                      Int       @default(0)
+  manufacturerName           String
+  manufacturerAddress        String
+  fssaiNo                    String
+  udyamNo                    String?
+  organicCertificationNumber String?
+  originRegion               String    @default("Konkan, Maharashtra")
+  harvestBatch               String?
+  harvestDate                String?
+  shelfLifeDays              Int?
+  weightGrams                Float
+  isPreOrder                 Boolean   @default(false)
+  isActive                   Boolean   @default(true)
+  createdAt                  DateTime  @default(now())
+  updatedAt                  DateTime  @updatedAt
+
+  orderItems                 OrderItem[]
+
+  @@index([storeId])
+}
+
+model Order {
+  id                    String    @id @default(cuid())
+  orderNumber           String    @unique
+  storeId               String
+  store                 Store     @relation(fields: [storeId], references: [id])
+  customerId            String
+  customer              User      @relation("CustomerOrders", fields: [customerId], references: [id])
+  customerName          String
+  customerPhone         String
+  customerEmail         String
+  deliveryType          String    @default("SHIPPING") // SHIPPING, STORE_PICKUP
+  shippingAddressJson   String?   // JSON object with address
+  pickupStoreId         String?
+  subtotal              Float
+  taxAmount             Float
+  shippingFee           Float
+  discountAmount        Float     @default(0)
+  totalAmount           Float
+  paymentMethod         String    // RAZORPAY, PAYTM_PG, CASHFREE, EAZEBUZZ, PAYU, CASH_ON_DELIVERY
+  paymentStatus         String    @default("PENDING") // PENDING, PAID, FAILED, REFUNDED
+  orderStatus           String    @default("PLACED") // PLACED, CONFIRMED, PROCESSING, SHIPPED, DELIVERED, CANCELLED
+  estimatedDeliveryDate String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  items                 OrderItem[]
+  shipment              Shipment?
+  paymentTransactions   PaymentTransaction[]
+  returns               ReturnRequest[]
+
+  @@index([storeId])
+  @@index([customerId])
+}
+
+model OrderItem {
+  id               String   @id @default(cuid())
+  orderId          String
+  order            Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId        String
+  product          Product  @relation(fields: [productId], references: [id])
+  productName      String
+  productImage     String
+  quantity         Int
+  unitPrice        Float
+  totalPrice       Float
+  fssaiNo          String?
+  manufacturerName String?
+
+  returns          ReturnRequest[]
+}
+
+model Shipment {
+  id                          String    @id @default(cuid())
+  orderId                     String    @unique
+  order                       Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  awbNumber                   String    @unique
+  courierPartner              String    @default("IN_HOUSE") // IN_HOUSE, SHIPROCKET, NIMBUSPOST, TOOKAN, SHIPDAY, PIDGE
+  status                      String    @default("CREATED") // CREATED, PICKED_UP, IN_TRANSIT, OUT_FOR_DELIVERY, DELIVERED
+  pickupPincode               String
+  deliveryPincode             String
+  currentHubId                String?
+  assignedDeliveryExecutiveId String?
+  deliveryExecutive           User?     @relation("DeliveryExecutiveShipments", fields: [assignedDeliveryExecutiveId], references: [id])
+  assignedTruckDriverId       String?
+  tripSheetId                 String?
+  tripSheet                   TripSheet? @relation(fields: [tripSheetId], references: [id])
+  estimatedDeliveryDate       String
+  shippingLabelUrl            String?
+  otpSecret                   String?   // 4-digit code for delivery verification
+  proofOfDeliveryJson         String?   // JSON of signature, photo, timestamp
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+
+  checkpoints                 TrackingCheckpoint[]
+}
+
+model TrackingCheckpoint {
+  id          String   @id @default(cuid())
+  shipmentId  String
+  shipment    Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+  status      String
+  location    String
+  description String
+  actorName   String?
+  timestamp   DateTime @default(now())
+
+  @@index([shipmentId])
+}
+
+model ReturnRequest {
+  id               String     @id @default(cuid())
+  orderId          String
+  order            Order      @relation(fields: [orderId], references: [id])
+  orderItemId      String
+  orderItem        OrderItem  @relation(fields: [orderItemId], references: [id])
+  storeId          String
+  store            Store      @relation(fields: [storeId], references: [id])
+  type             String     @default("RETURN") // RETURN, REPLACEMENT
+  reason           String
+  customerRemarks  String?
+  evidenceImages   String     // JSON array of image URLs
+  status           String     @default("REQUESTED") // REQUESTED, APPROVED, REJECTED, REFUNDED
+  adminRemarks     String?
+  refundAmount     Float?
+  reverseAwb       String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}
+
+model PaymentTransaction {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  gateway       String   // RAZORPAY, PAYTM_PG, CASHFREE, EAZEBUZZ, PAYU
+  transactionId String   @unique
+  amount        Float
+  status        String   // SUCCESS, FAILED, PENDING, REFUNDED
+  rawResponse   String?  // JSON string
+  createdAt     DateTime @default(now())
+}
+
+model DeveloperKeyVault {
+  id          String   @id @default(cuid())
+  keyType     String   @unique // RAZORPAY, PAYTM, CASHFREE, EAZEBUZZ, PAYU, SHIPROCKET, NIMBUSPOST, TOOKAN, SHIPDAY, PIDGE
+  credentials String   // JSON encrypted credentials
+  isEnabled   Boolean  @default(true)
+  environment String   @default("SANDBOX") // SANDBOX, PRODUCTION
+  updatedAt   DateTime @updatedAt
+}
+
+model LogisticsHub {
+  id                 String   @id @default(cuid())
+  hubCode            String   @unique
+  name               String
+  hubType            String   // ORIGIN_SORTING, INTERMEDIATE_HUB, DELIVERY_BRANCH
+  city               String
+  state              String
+  pincode            String
+  contactNumber      String
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+}
+
+model TripSheet {
+  id                 String    @id @default(cuid())
+  tripCode           String    @unique
+  driverId           String
+  driver             User      @relation("DriverTripSheets", fields: [driverId], references: [id])
+  vehicleNumber      String
+  vehicleType        String    // 14FT_TRUCK, 20FT_CONTAINER, REFRIGERATED_VAN
+  originHubCode      String
+  destinationHubCode String
+  status             String    @default("SCHEDULED") // SCHEDULED, IN_TRANSIT, ARRIVED, COMPLETED
+  departureTime      DateTime?
+  estimatedArrival   DateTime?
+  actualArrival      DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  shipments          Shipment[]
+}

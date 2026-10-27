@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Gogate Logistics Partner",
+    "slug": "gogate-logistics",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#15803d"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#15803d"
+      }
+    }
+  }
+}
