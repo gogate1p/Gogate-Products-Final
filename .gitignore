@@ -4,6 +4,7 @@ node_modules
 .nuxt
 .turbo
 dist
+.vercel
 .cache
 *.local
 .env
