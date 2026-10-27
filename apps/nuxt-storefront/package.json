@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxt build && node -e \"const fs=require('fs'); if(!fs.existsSync('dist')){fs.cpSync('.output/public','dist',{recursive:true});}\"",
     "dev": "nuxt dev -p 3004",
     "generate": "nuxt generate",
     "preview": "nuxt preview"

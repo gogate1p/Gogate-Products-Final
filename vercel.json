@@ -11,7 +11,8 @@
     },
     "nuxt-storefront": {
       "root": "apps/nuxt-storefront",
-      "framework": "nuxtjs"
+      "framework": "nuxtjs",
+      "outputDirectory": "dist"
     },
     "seller-portal": {
       "root": "apps/seller-portal",
