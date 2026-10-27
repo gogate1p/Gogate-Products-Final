@@ -550,7 +550,7 @@ export default function SellerOrdersManagementPage() {
               </div>
 
               <a
-                href={`http://localhost:3000/track?awb=${activeModalOrder.awbNumber || activeModalOrder.orderNumber}`}
+                href={`${process.env.NEXT_PUBLIC_STOREFRONT_URL || (process.env.VERCEL ? '' : 'http://localhost:3000')}/track?awb=${activeModalOrder.awbNumber || activeModalOrder.orderNumber}`}
                 target="_blank"
                 rel="noreferrer"
                 className="px-4 py-2 text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-300 rounded-xl hover:bg-emerald-100"

@@ -1,0 +1,149 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "admin-portal": {
+      "root": "apps/admin-portal",
+      "framework": "nextjs",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "web-storefront",
+          "format": "url",
+          "env": "STOREFRONT_URL"
+        },
+        {
+          "type": "service",
+          "service": "seller-portal",
+          "format": "url",
+          "env": "SELLER_PORTAL_URL"
+        },
+        {
+          "type": "service",
+          "service": "hub-courier-portal",
+          "format": "url",
+          "env": "HUB_PORTAL_URL"
+        }
+      ]
+    },
+    "hub-courier-portal": {
+      "root": "apps/hub-courier-portal",
+      "framework": "nextjs",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "admin-portal",
+          "format": "url",
+          "env": "ADMIN_PORTAL_URL"
+        }
+      ]
+    },
+    "nuxt-storefront": {
+      "root": "apps/nuxt-storefront",
+      "framework": "nuxtjs"
+    },
+    "seller-portal": {
+      "root": "apps/seller-portal",
+      "framework": "nextjs",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "web-storefront",
+          "format": "url",
+          "env": "STOREFRONT_URL"
+        },
+        {
+          "type": "service",
+          "service": "admin-portal",
+          "format": "url",
+          "env": "ADMIN_PORTAL_URL"
+        }
+      ]
+    },
+    "web-storefront": {
+      "root": "apps/web-storefront",
+      "framework": "nextjs",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "admin-portal",
+          "format": "url",
+          "env": "ADMIN_PORTAL_URL"
+        },
+        {
+          "type": "service",
+          "service": "seller-portal",
+          "format": "url",
+          "env": "SELLER_PORTAL_URL"
+        },
+        {
+          "type": "service",
+          "service": "hub-courier-portal",
+          "format": "url",
+          "env": "HUB_PORTAL_URL"
+        },
+        {
+          "type": "service",
+          "service": "nuxt-storefront",
+          "format": "url",
+          "env": "NUXT_STOREFRONT_URL"
+        }
+      ]
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/admin/(.*)",
+      "destination": {
+        "service": "admin-portal"
+      }
+    },
+    {
+      "source": "/admin",
+      "destination": {
+        "service": "admin-portal"
+      }
+    },
+    {
+      "source": "/seller/(.*)",
+      "destination": {
+        "service": "seller-portal"
+      }
+    },
+    {
+      "source": "/seller",
+      "destination": {
+        "service": "seller-portal"
+      }
+    },
+    {
+      "source": "/hub/(.*)",
+      "destination": {
+        "service": "hub-courier-portal"
+      }
+    },
+    {
+      "source": "/hub",
+      "destination": {
+        "service": "hub-courier-portal"
+      }
+    },
+    {
+      "source": "/regional/(.*)",
+      "destination": {
+        "service": "nuxt-storefront"
+      }
+    },
+    {
+      "source": "/regional",
+      "destination": {
+        "service": "nuxt-storefront"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "web-storefront"
+      }
+    }
+  ]
+}

@@ -102,7 +102,7 @@ export default function RootLayout({
                 ✓ KYC Verified Store
               </span>
               <a
-                href="http://localhost:3000"
+                href={process.env.NEXT_PUBLIC_STOREFRONT_URL || (process.env.VERCEL ? '/' : 'http://localhost:3000')}
                 target="_blank"
                 rel="noreferrer"
                 className="px-3 py-1.5 text-xs font-semibold text-stone-700 bg-stone-100 hover:bg-stone-200 rounded-lg transition"

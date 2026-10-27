@@ -149,10 +149,10 @@ export default function RootLayout({
               <div>
                 <h4 className="font-bold text-white text-sm mb-3">Portals & Ecosystem</h4>
                 <ul className="text-xs space-y-2 text-stone-400">
-                  <li><a href="http://localhost:3001" target="_blank" rel="noreferrer" className="hover:text-white">Superadmin Control Tower ↗</a></li>
-                  <li><a href="http://localhost:3002" target="_blank" rel="noreferrer" className="hover:text-white">Seller / Store Portal ↗</a></li>
-                  <li><a href="http://localhost:3003" target="_blank" rel="noreferrer" className="hover:text-white">Courier & Logistics Hub Portal ↗</a></li>
-                  <li><a href="http://localhost:3004" target="_blank" rel="noreferrer" className="hover:text-white">Nuxt 3 Regional Storefront ↗</a></li>
+                  <li><a href={process.env.NEXT_PUBLIC_ADMIN_PORTAL_URL || (process.env.VERCEL ? '/admin' : 'http://localhost:3001')} target="_blank" rel="noreferrer" className="hover:text-white">Superadmin Control Tower ↗</a></li>
+                  <li><a href={process.env.NEXT_PUBLIC_SELLER_PORTAL_URL || (process.env.VERCEL ? '/seller' : 'http://localhost:3002')} target="_blank" rel="noreferrer" className="hover:text-white">Seller / Store Portal ↗</a></li>
+                  <li><a href={process.env.NEXT_PUBLIC_HUB_PORTAL_URL || (process.env.VERCEL ? '/hub' : 'http://localhost:3003')} target="_blank" rel="noreferrer" className="hover:text-white">Courier & Logistics Hub Portal ↗</a></li>
+                  <li><a href={process.env.NEXT_PUBLIC_NUXT_STOREFRONT_URL || (process.env.VERCEL ? '/regional' : 'http://localhost:3004')} target="_blank" rel="noreferrer" className="hover:text-white">Nuxt 3 Regional Storefront ↗</a></li>
                 </ul>
               </div>
 
