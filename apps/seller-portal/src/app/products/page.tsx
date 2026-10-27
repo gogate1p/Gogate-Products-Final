@@ -123,6 +123,7 @@ export default function SellerProductsPage() {
       originRegion: newProd.originRegion,
       image: newProd.image,
       weightGrams: parseFloat(newProd.weightGrams) || 500,
+      isQuickDelivery: true,
     };
     setProducts([created, ...products]);
     setShowAddModal(false);
