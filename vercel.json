@@ -3,39 +3,11 @@
   "services": {
     "admin-portal": {
       "root": "apps/admin-portal",
-      "framework": "nextjs",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "web-storefront",
-          "format": "url",
-          "env": "STOREFRONT_URL"
-        },
-        {
-          "type": "service",
-          "service": "seller-portal",
-          "format": "url",
-          "env": "SELLER_PORTAL_URL"
-        },
-        {
-          "type": "service",
-          "service": "hub-courier-portal",
-          "format": "url",
-          "env": "HUB_PORTAL_URL"
-        }
-      ]
+      "framework": "nextjs"
     },
     "hub-courier-portal": {
       "root": "apps/hub-courier-portal",
-      "framework": "nextjs",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "admin-portal",
-          "format": "url",
-          "env": "ADMIN_PORTAL_URL"
-        }
-      ]
+      "framework": "nextjs"
     },
     "nuxt-storefront": {
       "root": "apps/nuxt-storefront",
@@ -43,51 +15,11 @@
     },
     "seller-portal": {
       "root": "apps/seller-portal",
-      "framework": "nextjs",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "web-storefront",
-          "format": "url",
-          "env": "STOREFRONT_URL"
-        },
-        {
-          "type": "service",
-          "service": "admin-portal",
-          "format": "url",
-          "env": "ADMIN_PORTAL_URL"
-        }
-      ]
+      "framework": "nextjs"
     },
     "web-storefront": {
       "root": "apps/web-storefront",
-      "framework": "nextjs",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "admin-portal",
-          "format": "url",
-          "env": "ADMIN_PORTAL_URL"
-        },
-        {
-          "type": "service",
-          "service": "seller-portal",
-          "format": "url",
-          "env": "SELLER_PORTAL_URL"
-        },
-        {
-          "type": "service",
-          "service": "hub-courier-portal",
-          "format": "url",
-          "env": "HUB_PORTAL_URL"
-        },
-        {
-          "type": "service",
-          "service": "nuxt-storefront",
-          "format": "url",
-          "env": "NUXT_STOREFRONT_URL"
-        }
-      ]
+      "framework": "nextjs"
     }
   },
   "rewrites": [
