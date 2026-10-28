@@ -81,9 +81,9 @@ export default function CartPage() {
             <div className="card p-5">
               <p className="text-sm text-forest-900">
                 {subtotal > FREE_SHIPPING_THRESHOLD ? (
-                  <span className="font-semibold">You’ve unlocked free cold-chain shipping.</span>
+                  <span className="font-semibold">You’ve unlocked free express shipping.</span>
                 ) : (
-                  <>Add <span className="font-semibold">₹{(FREE_SHIPPING_THRESHOLD - subtotal).toLocaleString('en-IN')}</span> more for free cold-chain shipping.</>
+                  <>Add <span className="font-semibold">₹{(FREE_SHIPPING_THRESHOLD - subtotal).toLocaleString('en-IN')}</span> more for free shipping.</>
                 )}
               </p>
               <div className="mt-3 h-1.5 rounded-full bg-stone-100 overflow-hidden">
@@ -131,7 +131,7 @@ export default function CartPage() {
             <h2 className="font-semibold text-forest-950">Delivery method</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
-                { key: 'SHIPPING' as const, icon: Truck, title: 'Doorstep delivery', text: 'Refrigerated fleet & priority couriers', badge: null },
+                { key: 'SHIPPING' as const, icon: Truck, title: 'Doorstep delivery', text: 'Careful farm packing & priority couriers', badge: null },
                 { key: 'STORE_PICKUP' as const, icon: Store, title: 'Click & collect', text: 'Gogate Orchards flagship, Pawas', badge: 'Free' },
               ].map(({ key, icon: Icon, title, text, badge }) => {
                 const active = deliveryType === key;

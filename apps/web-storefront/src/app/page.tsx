@@ -7,7 +7,7 @@ import HeroSlideshow from '../components/HeroSlideshow';
 import SellerRatingModal from '../components/SellerRatingModal';
 import { Zap, Truck, Share2, Star, Plus, Minus, ArrowRight, Check, X, MapPin } from 'lucide-react';
 
-interface OrganicItem {
+interface AgroItem {
   id: string;
   slug: string;
   name: string;
@@ -29,7 +29,7 @@ interface OrganicItem {
   sellerName: string;
 }
 
-const catalog: OrganicItem[] = [
+const catalog: AgroItem[] = [
   {
     id: 'prod_1',
     slug: 'ratnagiri-alphonso-mango-grade-a',
@@ -49,14 +49,14 @@ const catalog: OrganicItem[] = [
     isPreOrder: true,
     harvestMonth: 'May 2026 Batch',
     origin: 'Pawas, Ratnagiri',
-    sellerName: 'Gogate Organic Orchards (Flagship)',
+    sellerName: 'Gogate Orchards (Ratnagiri Flagship)',
   },
   {
     id: 'prod_2',
     slug: 'konkan-jumbo-cashews-w180',
     name: 'Konkan Jumbo Roasted & Salted Cashews - W180 King Size (500g)',
     category: 'CASHEWS',
-    description: 'Hand-shelled Grade W180 King Size organic cashew nuts from coastal Konkan. Lightly wood-fire roasted with natural rock salt.',
+    description: 'Hand-shelled Grade W180 King Size premium cashew nuts from coastal Konkan. Lightly wood-fire roasted with natural rock salt.',
     image: 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=800',
     price: 799,
     mrp: 950,
@@ -69,14 +69,14 @@ const catalog: OrganicItem[] = [
     isBestseller: true,
     isPreOrder: false,
     origin: 'Ratnagiri, Maharashtra',
-    sellerName: 'Gogate Organic Orchards (Flagship)',
+    sellerName: 'Gogate Orchards (Ratnagiri Flagship)',
   },
   {
     id: 'prod_3',
     slug: 'pure-kokum-agal-750ml',
     name: 'Pure Cold-Pressed Kokum Agal (Zero Sugar / Wild Foraged - 750ml)',
     category: 'KOKUM_PRODUCTS',
-    description: 'Pure coastal Garcinia indica extract infused with natural sea salt. Ideal for traditional Sol Kadhi and organic tonics.',
+    description: 'Pure coastal Garcinia indica extract infused with natural sea salt. Ideal for traditional Sol Kadhi and natural tonics.',
     image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=800',
     price: 260,
     mrp: 320,
@@ -95,7 +95,7 @@ const catalog: OrganicItem[] = [
     slug: 'authentic-malvani-masala-500g',
     name: 'Stone-Pounded Konkan Malvani Special Masala (500g)',
     category: 'SPICES_AND_MASALAS',
-    description: 'Handcrafted blend of 28 sun-dried organic spices including Dagad Phool, Star Anise, and Byadgi chillies.',
+    description: 'Handcrafted blend of 28 sun-dried pure spices including Dagad Phool, Star Anise, and Byadgi chillies.',
     image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800',
     price: 380,
     mrp: 450,
@@ -134,7 +134,7 @@ export default function StorefrontHome() {
     prod_2: 1,
   });
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [preOrderModalItem, setPreOrderModalItem] = useState<OrganicItem | null>(null);
+  const [preOrderModalItem, setPreOrderModalItem] = useState<AgroItem | null>(null);
   const [showSellerModal, setShowSellerModal] = useState(false);
 
   const showToast = (msg: string) => {
@@ -142,12 +142,12 @@ export default function StorefrontHome() {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const handleShare = (item: OrganicItem) => {
+  const handleShare = (item: AgroItem) => {
     const shareUrl = `${window.location.origin}/product/${item.slug}`;
     if (navigator.share) {
       navigator.share({
         title: item.name,
-        text: `Order fresh farm organic ${item.name} from Gogate Products!`,
+        text: `Order fresh farm harvest ${item.name} from Gogate Products!`,
         url: shareUrl,
       }).catch(() => {});
     } else {
@@ -243,7 +243,7 @@ export default function StorefrontHome() {
             <p className="text-sm text-stone-500 mt-2 max-w-xl">
               {deliveryMode === 'QUICK'
                 ? 'Ready-to-eat Alphonso crates, chilled kokum and roasted cashews from your nearest hub.'
-                : 'Shipped direct from Ratnagiri in temperature-controlled reefer trucks.'}
+                : 'Shipped direct from Ratnagiri with damage-safe protective packaging.'}
             </p>
           </div>
 
@@ -256,7 +256,7 @@ export default function StorefrontHome() {
               }`}
             >
               <Truck className="w-4 h-4" />
-              Cold-chain · 1–2 days
+              Standard · 1–2 days
             </button>
             <button
               onClick={() => setDeliveryMode('QUICK')}
@@ -292,7 +292,7 @@ export default function StorefrontHome() {
         {displayedItems.length === 0 ? (
           <div className="card py-16 text-center">
             <p className="heading-display text-xl">Nothing here for express delivery yet</p>
-            <p className="text-sm text-stone-500 mt-2">Switch to cold-chain delivery to see the full catalog.</p>
+            <p className="text-sm text-stone-500 mt-2">Switch to standard delivery to see the full catalog.</p>
             <button onClick={() => setDeliveryMode('STANDARD')} className="btn-primary mt-5">Show full catalog</button>
           </div>
         ) : (
@@ -466,7 +466,7 @@ export default function StorefrontHome() {
                 {totalCartCount} item{totalCartCount > 1 ? 's' : ''} · ₹{totalCartAmount.toLocaleString('en-IN')}
               </p>
               <p className="text-[11px] text-white/60 truncate">
-                {deliveryMode === 'QUICK' ? 'Express 15–30 min delivery' : 'Cold-chain delivery in 1–2 days'}
+                {deliveryMode === 'QUICK' ? 'Express 15–30 min delivery' : 'Standard farm delivery in 1–2 days'}
               </p>
             </div>
             <Link href="/cart" className="btn-accent py-2.5 shrink-0">
@@ -498,7 +498,7 @@ export default function StorefrontHome() {
               <dl className="divide-y divide-stone-100 text-sm rounded-2xl border border-stone-200">
                 <div className="flex justify-between px-4 py-3"><dt className="text-stone-500">Harvest batch</dt><dd className="font-semibold">May 2026</dd></div>
                 <div className="flex justify-between px-4 py-3"><dt className="text-stone-500">Locked price</dt><dd className="font-semibold">₹{preOrderModalItem.price.toLocaleString('en-IN')}</dd></div>
-                <div className="flex justify-between px-4 py-3"><dt className="text-stone-500">Transit</dt><dd className="font-semibold">Within 24h, cold-chain</dd></div>
+                <div className="flex justify-between px-4 py-3"><dt className="text-stone-500">Transit</dt><dd className="font-semibold">Express farm direct</dd></div>
               </dl>
               <div className="flex gap-3 pt-2">
                 <button onClick={() => setPreOrderModalItem(null)} className="btn-outline flex-1">Not now</button>

@@ -238,7 +238,7 @@ export default function CheckoutPage() {
               <span className="font-semibold text-stone-900">₹{subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-stone-600">
-              <span>Cold Chain Shipping</span>
+              <span>Express Farm Shipping</span>
               <span className="font-semibold text-emerald-800">FREE</span>
             </div>
             <div className="flex justify-between text-stone-600">

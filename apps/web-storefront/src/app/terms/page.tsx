@@ -10,7 +10,7 @@ export default function TermsPage() {
       </div>
 
       <div className="prose prose-stone text-xs sm:text-sm leading-relaxed space-y-4 text-stone-700">
-        <h3 className="font-bold text-base text-stone-900">1. Nature of Organic Agricultural Produce</h3>
+        <h3 className="font-bold text-base text-stone-900">1. Nature of Natural Agricultural Produce</h3>
         <p>
           Gogate Products sources directly from GI-certified family orchards in Pawas (Ratnagiri) and Devgad. Produce like Alphonso Mangoes are 100% natural, chemical-free, and tree-ripened without calcium carbide. As natural commodities, fruit sizes, exterior markings, and sweetness levels may exhibit natural agricultural variations.
         </p>
@@ -22,7 +22,7 @@ export default function TermsPage() {
 
         <h3 className="font-bold text-base text-stone-900">3. Multi-Vendor Platform Compliance</h3>
         <p>
-          Participating stores and regional cooperatives (e.g. Devgad Cashew Guild) must maintain active FSSAI and MSME Udyam certifications. Superadmin reserves the right to disable stores that fail to meet organic food standards.
+          Participating stores and regional cooperatives (e.g. Devgad Cashew Guild) must maintain active FSSAI and MSME Udyam certifications. Superadmin reserves the right to disable stores that fail to meet food quality and grading standards.
         </p>
 
         <h3 className="font-bold text-base text-stone-900">4. Payment Methods & Tokenization</h3>

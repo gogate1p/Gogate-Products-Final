@@ -6,7 +6,7 @@ export default function ReturnPolicyPage() {
       <div>
         <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Quality Assurance</span>
         <h1 className="text-3xl font-black text-stone-900 mt-1">Return & Replacement Policy</h1>
-        <p className="text-xs text-stone-500 mt-1">100% Organic Fresh Harvest Guarantee</p>
+        <p className="text-xs text-stone-500 mt-1">Authentic Fresh Harvest Quality Guarantee</p>
       </div>
 
       <div className="text-xs sm:text-sm leading-relaxed space-y-4 text-stone-700">

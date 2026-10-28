@@ -4,14 +4,14 @@ import { Inter, Fraunces } from 'next/font/google';
 import AnnouncementTicker from '../components/AnnouncementTicker';
 import LightboxAnnouncementModal from '../components/LightboxAnnouncementModal';
 import ProfileDropdown from '../components/ProfileDropdown';
-import { Search, MapPin, Truck, Heart, ShoppingBag, ChevronDown, ShieldCheck, Leaf, Snowflake } from 'lucide-react';
+import { Search, MapPin, Truck, Heart, ShoppingBag, ChevronDown, ShieldCheck, Leaf, Package } from 'lucide-react';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
 
 export const metadata = {
-  title: 'Gogate Products - Organic Mangoes, Cashews & Farm Produce',
-  description: 'Farm-direct GI tagged Ratnagiri Alphonso mangoes, jumbo cashews, and wild kokum with 15-min quick delivery and cold-chain shipping.',
+  title: 'Gogate Products - Authentic Devgad Mangoes, Cashews & Agro Produce',
+  description: 'Farm-direct GI tagged Ratnagiri & Devgad Alphonso mangoes, jumbo cashews, and coastal agro harvests delivered fresh to your doorstep.',
 };
 
 const categoryNav = [
@@ -128,8 +128,8 @@ export default function RootLayout({
                 </Link>
               ))}
               <span className="ml-auto hidden lg:flex items-center gap-1.5 text-xs text-forest-700 whitespace-nowrap">
-                <Snowflake className="w-3.5 h-3.5" />
-                Cold-chain delivery across India
+                <Truck className="w-3.5 h-3.5" />
+                Direct farm delivery across India
               </span>
             </div>
           </nav>
@@ -145,7 +145,7 @@ export default function RootLayout({
           <div className="page-container py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { icon: Leaf, title: 'GI-Certified Origin', text: 'Authentic Ratnagiri Hapus' },
-              { icon: Snowflake, title: 'Cold-Chain Shipping', text: 'Reefer trucks at 17°C' },
+              { icon: Package, title: 'Damage-Safe Packaging', text: 'Honeycomb protective packing' },
               { icon: Truck, title: 'Express in 30 mins', text: 'Pune & Mumbai hubs' },
               { icon: ShieldCheck, title: 'Freshness Guarantee', text: 'Free replacement' },
             ].map(({ icon: Icon, title, text }) => (
@@ -174,7 +174,7 @@ export default function RootLayout({
                   <span className="font-display text-2xl font-semibold text-white tracking-tight">Gogate Products</span>
                 </div>
                 <p className="text-sm leading-relaxed text-forest-100/70 max-w-sm">
-                  Three generations of growing GI-certified Alphonso mangoes, Konkan cashews and coastal produce in Pawas, Ratnagiri — shipped farm-direct in cold-chain.
+                  Three generations of growing GI-certified Alphonso mangoes, Konkan cashews and coastal produce in Pawas, Ratnagiri — naturally ripened and shipped farm-direct.
                 </p>
                 <div className="space-y-1 text-xs font-mono text-forest-200/60">
                   <p>FSSAI Lic No: 11521045000123</p>
@@ -197,7 +197,7 @@ export default function RootLayout({
                 <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-mango-300 mb-4">Help & Policies</h4>
                 <ul className="text-sm space-y-2.5">
                   <li><Link href="/account?tab=contact" className="hover:text-white transition">Contact Us</Link></li>
-                  <li><Link href="/shipping-policy" className="hover:text-white transition">Cold-Chain Shipping Policy</Link></li>
+                  <li><Link href="/shipping-policy" className="hover:text-white transition">Shipping & Delivery Policy</Link></li>
                   <li><Link href="/return-policy" className="hover:text-white transition">Return & Replacement</Link></li>
                   <li><Link href="/cancellation-policy" className="hover:text-white transition">Cancellation Policy</Link></li>
                   <li><Link href="/terms" className="hover:text-white transition">Terms and Conditions</Link></li>

@@ -96,7 +96,7 @@ export default function ProductReviewsSection({
               onClick={onSellerClick}
               className="font-bold text-emerald-800 underline hover:text-emerald-950 inline-flex items-center gap-1"
             >
-              <span>Gogate Organic Orchards (Pawas)</span>
+              <span>Gogate Orchards (Pawas)</span>
               <span className="text-[10px] bg-emerald-100 px-1.5 py-0.5 rounded text-emerald-900 font-extrabold">
                 View Seller SLA Ratings ➔
               </span>

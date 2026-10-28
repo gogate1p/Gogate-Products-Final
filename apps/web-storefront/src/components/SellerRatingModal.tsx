@@ -16,14 +16,14 @@ interface SellerReputation {
 }
 
 const defaultSeller: SellerReputation = {
-  storeName: 'Gogate Organic Orchards (Ratnagiri Flagship)',
+  storeName: 'Gogate Orchards (Ratnagiri Flagship)',
   location: 'Gogate Wadi, Pawas, Taluka Ratnagiri, Maharashtra 415616',
   fssaiNumber: '11521045000123',
   udyamNumber: 'UDYAM-MH-27-0012345',
   totalOrdersFulfilled: '14,280+ Farm Crates',
   deliveryTimeRating: 4.9,
   onTimeDeliveryRate: '98.6%',
-  avgTransitHours: '20-24 Hours (Cold Linehaul)',
+  avgTransitHours: '20-24 Hours (Direct Linehaul)',
   productQualityRating: 4.95,
   naturalRipenedScore: '100% Tree-Ripened (Zero Carbide)',
   freshnessRetention: '99.4% Freshness Retention',
@@ -57,7 +57,7 @@ export default function SellerRatingModal({
                 </h3>
               </div>
               <p className="text-xs text-emerald-800 font-semibold mt-0.5">
-                ✓ Superadmin Verified Organic Grower
+                ✓ Superadmin Verified GI Grower
               </p>
             </div>
           </div>

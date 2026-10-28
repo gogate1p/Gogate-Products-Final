@@ -121,12 +121,11 @@ export default function OrderPipelineTracker({
     PACKED: [
       {
         id: 'p_1',
-        title: 'Organic Inspection & Sorting',
+        title: 'Quality Inspection & Sorting',
         description: 'Graded Grade A Alphonso mangoes; verified zero carbide, natural straw cushion packed.',
         timestamp: '27 Oct, 02:45 PM',
         location: 'Pawas Orchard Packhouse',
         isCompleted: true,
-        temperatureCelsius: 16.0,
       },
       {
         id: 'p_2',
@@ -230,7 +229,7 @@ export default function OrderPipelineTracker({
       {
         id: 'rep_1',
         title: 'Zero-Cost Fresh Box Dispatched',
-        description: 'Organic guarantee triggered. Fresh Pawas Alphonso batch allocated instantly.',
+        description: 'Harvest quality guarantee triggered. Fresh Pawas Alphonso batch allocated instantly.',
         timestamp: '28 Oct, 02:30 PM',
         location: 'Pawas Orchards Central Store',
         isCompleted: true,
@@ -323,7 +322,7 @@ export default function OrderPipelineTracker({
               {cancellationReason || 'Cancelled upon customer request via Admin Support. 100% refund initiated to source account.'}
             </p>
             <p className="text-[11px] text-rose-600 mt-1">
-              Note: Self-service customer cancellation is disabled to protect cold-chain linehaul operations.
+              Note: Self-service customer cancellation is disabled to protect scheduled courier logistics.
             </p>
           </div>
         </div>
@@ -510,11 +509,6 @@ export default function OrderPipelineTracker({
                           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                             <h4 className="text-xs font-extrabold text-stone-900 flex items-center gap-1.5 flex-wrap">
                               <span>{evt.title}</span>
-                              {evt.temperatureCelsius && (
-                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-800 border border-teal-200">
-                                  {evt.temperatureCelsius}°C Cold-Chain Controlled
-                                </span>
-                              )}
                             </h4>
                             <span className="text-[10px] text-stone-500 font-medium">{evt.timestamp}</span>
                           </div>

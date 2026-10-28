@@ -86,10 +86,10 @@ export default function OrderTrackingPage() {
       {/* Page Header */}
       <div>
         <h1 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">
-          Live Order Pipeline & Cold-Chain Tracking
+          Live Order Pipeline & Fleet Tracking
         </h1>
         <p className="text-xs text-stone-500 mt-1">
-          Track consignment milestones, integrated courier updates, and IoT refrigerated vehicle telemetry in real-time.
+          Track consignment milestones, integrated courier updates, and doorstep delivery pipeline in real-time.
         </p>
       </div>
 
@@ -127,7 +127,7 @@ export default function OrderTrackingPage() {
               </span>
             </div>
             <p className="text-xs text-stone-500 mt-1">
-              Store: <strong>Gogate Organic Orchards (Ratnagiri Flagship)</strong> • Ordered on 27 Oct 2026, 09:15 AM
+              Store: <strong>Gogate Orchards (Ratnagiri Flagship)</strong> • Ordered on 27 Oct 2026, 09:15 AM
             </p>
           </div>
 
@@ -287,7 +287,7 @@ export default function OrderTrackingPage() {
         {/* Return & Replacement Trigger Action */}
         <div className="border-t border-stone-100 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-stone-500">
-            Received bruised fruits or an incorrect item? Organic produce quality guarantee covers instant replacements for eligible items.
+            Received bruised fruits or an incorrect item? Farm harvest freshness guarantee covers instant replacements for eligible items.
           </p>
           <button
             onClick={() => setShowReturnModal(true)}
@@ -309,7 +309,7 @@ export default function OrderTrackingPage() {
               <h3 className="font-black text-stone-900 text-base">Admin-Controlled Cancellation</h3>
             </div>
             <p className="text-xs text-stone-600 leading-relaxed">
-              To protect the cold-chain integrity and prevent produce spoilage once farm linehaul logistics have been booked, <strong>customer self-cancellation is disabled</strong>.
+              To ensure farm harvest freshness and prevent produce loss once courier transit has been scheduled, <strong>customer self-cancellation is disabled</strong>.
             </p>
             <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-950 space-y-1">
               <p><strong>Cancellation Policy:</strong> Orders can only be cancelled by Superadmin prior to dispatch.</p>

@@ -60,7 +60,7 @@ export default function LightboxAnnouncementModal() {
         {/* Content Body */}
         <div className="p-6 space-y-4">
           <p className="text-xs text-stone-600 leading-relaxed">
-            The first flowering flush in our Pawas family orchards has matured. Pre-order your Grade A Alphonso mango crates with authentic GI-Tag certification and guaranteed cold-chain arrival.
+            The first flowering flush in our Pawas family orchards has matured. Pre-order your Grade A Alphonso mango crates with authentic GI-Tag certification and guaranteed orchard-fresh arrival.
           </p>
 
           <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 flex items-center justify-between">

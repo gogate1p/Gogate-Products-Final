@@ -6,7 +6,7 @@ const offers = [
   'Use code HAPUS200 for ₹200 off your first dozen Ratnagiri Alphonso',
   'Express 15–30 minute delivery now live across Pune & Mumbai',
   'This morning’s Pawas harvest is in — tree-ripened and carbide-free',
-  'Free cold-chain shipping on all orders above ₹1,999',
+  'Free express delivery on all orders above ₹1,999',
 ];
 
 export default function AnnouncementTicker() {
