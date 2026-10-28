@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { calculateEdd } from '@gogate/logistics-engine';
 import ProductReviewsSection from '../../../components/ProductReviewsSection';
 import SellerRatingModal from '../../../components/SellerRatingModal';
+import { Share2, Heart, Truck, MapPin, Zap, Star, ShieldCheck } from 'lucide-react';
 
 export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -56,8 +57,7 @@ export default function ProductDetailPage() {
     <div className="space-y-10 max-w-5xl mx-auto pb-12">
       {/* Toast Alert */}
       {toastMsg && (
-        <div className="fixed top-24 right-6 z-50 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-2xl text-xs font-semibold animate-fade-in flex items-center gap-2">
-          <span>🥭</span>
+        <div className="fixed top-24 right-6 z-50 bg-stone-900 text-white px-5 py-3 rounded-full shadow-2xl text-xs font-semibold animate-fade-in flex items-center gap-2">
           <span>{toastMsg}</span>
         </div>
       )}
@@ -77,7 +77,7 @@ export default function ProductDetailPage() {
           onClick={handleShare}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-stone-200 text-stone-700 font-bold hover:bg-stone-50 transition"
         >
-          <span>📤</span>
+          <Share2 className="w-3.5 h-3.5 text-stone-500" />
           <span>Share Product</span>
         </button>
       </div>
@@ -125,11 +125,11 @@ export default function ProductDetailPage() {
               <span className="veg-badge" title="100% Pure Organic Veg">
                 <span className="veg-dot" />
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900">
-                ★ 4.9 (382 reviews)
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 flex items-center gap-1">
+                <Star className="w-3 h-3 fill-amber-500 text-amber-500" /> 4.9 (382 reviews)
               </span>
-              <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md">
-                ⚡ 20 MINS Quick Drop
+              <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md flex items-center gap-1">
+                <Zap className="w-3 h-3 fill-emerald-700 text-emerald-700" /> 20 MINS Quick Drop
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight leading-snug">
@@ -200,11 +200,11 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Return / Replacement Eligibility Assurance */}
-            <div className="p-2.5 bg-emerald-50 rounded-xl border border-emerald-200 text-[11px] text-emerald-950 flex items-center gap-2">
-              <span className="text-base">🥭</span>
+            <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-[11px] text-emerald-950 flex items-start gap-2.5">
+              <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
               <div>
                 <strong>Eligible for 48-Hour Freshness Replacement & Return</strong>
-                <p className="text-[10px] text-emerald-800">
+                <p className="text-[10px] text-emerald-800 mt-0.5">
                   Organic transit guarantee applies to whole mango boxes. Cancellations handled exclusively by Superadmin support.
                 </p>
               </div>
@@ -213,8 +213,8 @@ export default function ProductDetailPage() {
 
           {/* EDD Pincode Checker */}
           <div className="p-5 rounded-2xl bg-emerald-50/50 border border-emerald-200 space-y-3">
-            <h4 className="font-bold text-emerald-950 text-xs uppercase tracking-wider">
-              📍 Check Estimated Delivery Date (EDD)
+            <h4 className="font-bold text-emerald-950 text-xs uppercase tracking-wider flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-emerald-800" /> Check Estimated Delivery Date (EDD)
             </h4>
             <form onSubmit={handlePincodeCheck} className="flex gap-2">
               <input
@@ -236,8 +236,9 @@ export default function ProductDetailPage() {
             {pincodeMessage && (
               <p className="text-xs font-semibold text-emerald-800">{pincodeMessage}</p>
             )}
-            <p className="text-[11px] text-stone-600">
-              🚚 Expected: <strong>{eddResult.formattedDeliveryDate}</strong> (Refrigerated Linehaul)
+            <p className="text-[11px] text-stone-600 flex items-center gap-1.5">
+              <Truck className="w-3.5 h-3.5 text-emerald-800" />
+              <span>Expected: <strong>{eddResult.formattedDeliveryDate}</strong> (Refrigerated Linehaul)</span>
             </p>
           </div>
 
@@ -247,23 +248,23 @@ export default function ProductDetailPage() {
               href="/checkout"
               className="flex-1 py-4 bg-amber-400 hover:bg-amber-300 text-stone-950 font-black rounded-2xl text-xs sm:text-sm transition shadow-md text-center"
             >
-              🥭 Pre-Order Now (May Harvest)
+              Pre-Order Now (May Harvest)
             </Link>
             <Link
               href="/cart"
               className="flex-1 py-4 bg-emerald-800 hover:bg-emerald-900 text-white font-black rounded-2xl text-xs sm:text-sm transition shadow-md text-center"
             >
-              Add to Cart ({cartCount}) ➔
+              Add to Basket ({cartCount})
             </Link>
             <button
               onClick={() => {
                 setIsWishlisted(!isWishlisted);
-                showToast(isWishlisted ? 'Removed from wishlist' : 'Saved to wishlist ❤️');
+                showToast(isWishlisted ? 'Removed from wishlist' : 'Saved to wishlist');
               }}
               aria-label="Wishlist"
-              className="w-12 h-12 rounded-2xl border border-stone-300 bg-white hover:bg-stone-50 flex items-center justify-center text-lg transition"
+              className="w-12 h-12 rounded-2xl border border-stone-300 bg-white hover:bg-stone-50 flex items-center justify-center transition"
             >
-              {isWishlisted ? '❤️' : '🤍'}
+              <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-rose-500 text-rose-500' : 'text-stone-400'}`} />
             </button>
           </div>
         </div>

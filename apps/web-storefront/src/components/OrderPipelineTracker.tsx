@@ -53,27 +53,27 @@ export default function OrderPipelineTracker({
   const [lastSyncTime, setLastSyncTime] = useState(courier.lastSyncedAt);
   const [expandedStage, setExpandedStage] = useState<string | null>('SHIPPED');
 
-  // Stages configuration based on mode
+  // Stages configuration based on mode (Purely typographic milestones, strictly zero icons)
   const standardStages = [
-    { key: 'ORDERED', label: 'Ordered', icon: '📝' },
-    { key: 'PACKED', label: 'Packed', icon: '📦' },
-    { key: 'SHIPPED', label: 'Shipped', icon: '🚚' },
-    { key: 'OUT_FOR_DELIVERY', label: 'Out for Delivery', icon: '🛵' },
-    { key: 'DELIVERED', label: 'Delivered', icon: '✅' },
+    { key: 'ORDERED', label: 'Ordered', step: '01' },
+    { key: 'PACKED', label: 'Packed', step: '02' },
+    { key: 'SHIPPED', label: 'Shipped', step: '03' },
+    { key: 'OUT_FOR_DELIVERY', label: 'Out for Delivery', step: '04' },
+    { key: 'DELIVERED', label: 'Delivered', step: '05' },
   ];
 
   const returnStages = [
-    { key: 'RETURN_REQUESTED', label: 'Return Requested', icon: '↩️' },
-    { key: 'PICKUP', label: 'Pickup from Doorstep', icon: '📦' },
-    { key: 'REFUND', label: 'Refund Processed', icon: '💸' },
+    { key: 'RETURN_REQUESTED', label: 'Return Requested', step: '01' },
+    { key: 'PICKUP', label: 'Pickup from Doorstep', step: '02' },
+    { key: 'REFUND', label: 'Refund Processed', step: '03' },
   ];
 
   const replacementStages = [
-    { key: 'REPLACEMENT_ORDERED', label: 'Replacement Initiated', icon: '🥭' },
-    { key: 'PACKED', label: 'Packed & Certified', icon: '📦' },
-    { key: 'SHIPPED', label: 'Shipped (Re-Dispatch)', icon: '🚚' },
-    { key: 'OUT_FOR_DELIVERY', label: 'Out for Delivery', icon: '🛵' },
-    { key: 'DELIVERED', label: 'Replacement Delivered', icon: '✅' },
+    { key: 'REPLACEMENT_ORDERED', label: 'Replacement Initiated', step: '01' },
+    { key: 'PACKED', label: 'Packed & Certified', step: '02' },
+    { key: 'SHIPPED', label: 'Shipped (Re-Dispatch)', step: '03' },
+    { key: 'OUT_FOR_DELIVERY', label: 'Out for Delivery', step: '04' },
+    { key: 'DELIVERED', label: 'Replacement Delivered', step: '05' },
   ];
 
   const stages =
@@ -252,22 +252,19 @@ export default function OrderPipelineTracker({
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden space-y-6 p-6 sm:p-8">
+    <div className="bg-white rounded-3xl border border-stone-200/90 shadow-sm overflow-hidden space-y-6 p-6 sm:p-8">
       {/* Top Header & Pipeline Mode Selector */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-stone-100">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xl">📍</span>
-            <h2 className="text-lg font-black text-stone-900 tracking-tight">
-              Order Pipeline & Real-Time Tracking
-            </h2>
-          </div>
+          <h2 className="text-lg font-black text-stone-900 tracking-tight">
+            Order Pipeline & Real-Time Tracking
+          </h2>
           <p className="text-xs text-stone-500 mt-0.5">
             Synchronized live with integrated 3PL logistics and IoT temperature telemetry.
           </p>
         </div>
 
-        {/* View Mode Switcher (Standard, Return, Replacement) */}
+        {/* View Mode Switcher (Standard, Return, Replacement) - Strictly text tags, no icons */}
         <div className="flex items-center gap-1.5 p-1 bg-stone-100 rounded-2xl shrink-0 text-xs font-bold">
           <button
             type="button"
@@ -277,11 +274,11 @@ export default function OrderPipelineTracker({
             }}
             className={`px-3 py-1.5 rounded-xl transition ${
               activeMode === 'STANDARD'
-                ? 'bg-white text-emerald-900 shadow-xs'
+                ? 'bg-white text-emerald-950 shadow-xs'
                 : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            🚚 Delivery Pipeline
+            Delivery Pipeline
           </button>
           <button
             type="button"
@@ -291,11 +288,11 @@ export default function OrderPipelineTracker({
             }}
             className={`px-3 py-1.5 rounded-xl transition ${
               activeMode === 'RETURN'
-                ? 'bg-white text-rose-900 shadow-xs'
+                ? 'bg-white text-rose-950 shadow-xs'
                 : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            ↩️ Return Flow
+            Return Flow
           </button>
           <button
             type="button"
@@ -305,11 +302,11 @@ export default function OrderPipelineTracker({
             }}
             className={`px-3 py-1.5 rounded-xl transition ${
               activeMode === 'REPLACEMENT'
-                ? 'bg-white text-amber-900 shadow-xs'
+                ? 'bg-white text-amber-950 shadow-xs'
                 : 'text-stone-600 hover:text-stone-900'
             }`}
           >
-            🥭 Replacement
+            Replacement
           </button>
         </div>
       </div>
@@ -317,7 +314,9 @@ export default function OrderPipelineTracker({
       {/* Cancelled Alert Banner (If Applicable) */}
       {isCancelled && (
         <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs text-rose-900 flex items-start gap-3">
-          <span className="text-2xl shrink-0">🛑</span>
+          <span className="px-2 py-0.5 rounded font-mono font-black bg-rose-200 text-rose-900 text-[10px] shrink-0 uppercase tracking-wider">
+            Alert
+          </span>
           <div>
             <p className="font-extrabold text-sm">Order Cancelled by Superadmin</p>
             <p className="mt-0.5 text-rose-700">
@@ -340,12 +339,12 @@ export default function OrderPipelineTracker({
           className={`absolute top-11 left-6 sm:left-12 h-1.5 rounded-full z-0 transition-all duration-1000 ease-in-out ${
             isCancelled
               ? 'bg-rose-500'
-              : 'bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-600 shadow-[0_0_12px_rgba(16,185,129,0.5)]'
+              : 'bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-700 shadow-[0_0_12px_rgba(16,185,129,0.4)]'
           }`}
           style={{ width: `calc(${progressPercent}% * 0.85)` }}
         />
 
-        {/* Pipeline Stage Nodes */}
+        {/* Pipeline Stage Nodes - Numbered Steps (No Icons) */}
         <div className="relative z-10 flex items-start justify-between">
           {stages.map((stg, idx) => {
             const isPassed = !isCancelled && idx <= currentIndex;
@@ -358,19 +357,19 @@ export default function OrderPipelineTracker({
                 onClick={() => setExpandedStage(stg.key)}
                 className="flex flex-col items-center cursor-pointer group text-center max-w-[80px] sm:max-w-[120px]"
               >
-                {/* Node Circle */}
+                {/* Node Circle - Milestone Number Step */}
                 <div
-                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-sm sm:text-base font-black transition-all duration-300 shadow-xs ${
+                  className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center font-mono text-xs sm:text-sm font-black transition-all duration-300 shadow-xs ${
                     isStageCancelled
                       ? 'bg-rose-100 border-2 border-rose-500 text-rose-700'
                       : isCurrent
-                      ? 'bg-emerald-600 border-4 border-emerald-100 text-white scale-110 shadow-lg shadow-emerald-500/30 ring-2 ring-emerald-600'
+                      ? 'bg-emerald-700 border-4 border-emerald-100 text-white scale-110 shadow-lg shadow-emerald-700/25 ring-2 ring-emerald-700'
                       : isPassed
                       ? 'bg-emerald-800 text-white'
-                      : 'bg-white border-2 border-stone-300 text-stone-400 group-hover:border-stone-400'
+                      : 'bg-white border-2 border-stone-200 text-stone-400 group-hover:border-stone-300'
                   }`}
                 >
-                  {stg.icon}
+                  {stg.step}
                 </div>
 
                 {/* Node Label */}
@@ -399,21 +398,21 @@ export default function OrderPipelineTracker({
       </div>
 
       {/* COURIER INTEGRATION BANNER UNDER 'SHIPPED' STAGE */}
-      <div className="p-4 sm:p-5 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200/80 rounded-2xl space-y-3">
+      <div className="p-4 sm:p-5 bg-gradient-to-br from-stone-50 to-emerald-50/40 border border-stone-200 rounded-2xl space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-800 text-white flex items-center justify-center text-lg font-black shadow-xs">
-              🚚
+            <div className="w-10 h-10 rounded-xl bg-stone-900 text-white flex items-center justify-center text-xs font-mono font-bold shadow-xs">
+              AWB
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-900">
+                <span className="text-xs font-bold uppercase tracking-wider text-stone-700">
                   Integrated Courier Partner:
                 </span>
                 <span className="px-2.5 py-0.5 bg-emerald-800 text-white rounded-lg text-xs font-black">
                   {courier.partnerName}
                 </span>
-                <span className="px-2 py-0.5 bg-white border border-emerald-300 text-emerald-900 rounded-md text-[11px] font-mono font-bold">
+                <span className="px-2 py-0.5 bg-white border border-stone-300 text-stone-900 rounded-md text-[11px] font-mono font-bold">
                   AWB: {courier.awbNumber}
                 </span>
               </div>
@@ -432,9 +431,8 @@ export default function OrderPipelineTracker({
                 type="button"
                 onClick={handleSyncCourier}
                 disabled={isSyncing}
-                className="px-3.5 py-2 bg-white hover:bg-emerald-100/50 text-emerald-900 border border-emerald-300 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-2xs disabled:opacity-50"
+                className="px-3.5 py-2 bg-white hover:bg-stone-50 text-stone-800 border border-stone-300 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-2xs disabled:opacity-50"
               >
-                <span className={isSyncing ? 'animate-spin' : ''}>🔄</span>
                 <span>{isSyncing ? 'Syncing...' : 'Sync Courier API'}</span>
               </button>
             )}
@@ -447,7 +445,6 @@ export default function OrderPipelineTracker({
                 className="px-3.5 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 shadow-2xs"
               >
                 <span>Live Courier Portal</span>
-                <span className="text-[10px]">↗</span>
               </a>
             )}
           </div>
@@ -460,7 +457,7 @@ export default function OrderPipelineTracker({
           <h3 className="text-xs font-extrabold uppercase tracking-wider text-stone-500">
             Granular Stage Checkpoints & Sub-Updates ({expandedStage || 'All'})
           </h3>
-          <span className="text-[11px] text-stone-400">Click any pipeline node to inspect</span>
+          <span className="text-[11px] text-stone-400">Click any milestone to inspect</span>
         </div>
 
         {/* Selected or All Sub-updates */}
@@ -485,12 +482,14 @@ export default function OrderPipelineTracker({
                   className="w-full px-4 py-3 flex items-center justify-between text-left"
                 >
                   <div className="flex items-center gap-2.5">
-                    <span className="text-base">{stg.icon}</span>
+                    <span className="font-mono text-xs font-black text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded-md">
+                      {stg.step}
+                    </span>
                     <span className="text-xs font-bold text-stone-900">
                       {stg.label} ({updates.length} events)
                     </span>
                   </div>
-                  <span className="text-xs text-stone-400">{isSelected ? '▲' : '▼'}</span>
+                  <span className="text-[11px] font-semibold text-stone-500">{isSelected ? 'Hide Details' : 'View Details'}</span>
                 </button>
 
                 {/* Sub-events list */}
@@ -499,7 +498,7 @@ export default function OrderPipelineTracker({
                     {updates.length === 0 ? (
                       <p className="text-xs text-stone-400 italic">No events logged yet for this stage.</p>
                     ) : (
-                      updates.map((evt, idx) => (
+                      updates.map((evt) => (
                         <div key={evt.id} className="relative pl-6 pb-2 border-l-2 border-emerald-200 last:border-none">
                           <div
                             className={`absolute -left-[7px] top-1 w-3 h-3 rounded-full ${
@@ -509,11 +508,11 @@ export default function OrderPipelineTracker({
                             }`}
                           />
                           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                            <h4 className="text-xs font-extrabold text-stone-900 flex items-center gap-1.5">
+                            <h4 className="text-xs font-extrabold text-stone-900 flex items-center gap-1.5 flex-wrap">
                               <span>{evt.title}</span>
                               {evt.temperatureCelsius && (
-                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-800">
-                                  ❄️ {evt.temperatureCelsius}°C Cold-Chain
+                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-800 border border-teal-200">
+                                  {evt.temperatureCelsius}°C Cold-Chain Controlled
                                 </span>
                               )}
                             </h4>
@@ -521,9 +520,8 @@ export default function OrderPipelineTracker({
                           </div>
                           <p className="text-xs text-stone-600 mt-0.5">{evt.description}</p>
                           {evt.location && (
-                            <p className="text-[10px] text-stone-400 mt-0.5 flex items-center gap-1">
-                              <span>📍</span>
-                              <span>{evt.location}</span>
+                            <p className="text-[10px] text-stone-400 mt-0.5">
+                              Location: {evt.location}
                             </p>
                           )}
                         </div>

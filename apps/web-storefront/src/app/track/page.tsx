@@ -135,10 +135,9 @@ export default function OrderTrackingPage() {
           <div>
             <button
               onClick={() => setShowCancelNotice(true)}
-              className="px-3.5 py-2 text-xs font-bold text-stone-600 bg-stone-100 hover:bg-stone-200 rounded-xl transition flex items-center gap-1.5"
+              className="px-3.5 py-2 text-xs font-bold text-stone-600 bg-stone-100 hover:bg-stone-200 rounded-xl transition"
             >
-              <span>🔒</span>
-              <span>Cancellation Policy</span>
+              Cancellation Policy
             </button>
           </div>
         </div>
@@ -164,14 +163,12 @@ export default function OrderTrackingPage() {
 
                 <div className="flex items-center gap-2 shrink-0">
                   {item.isReplaceable ? (
-                    <span className="px-2.5 py-1 bg-emerald-100 text-emerald-900 rounded-lg text-[10px] font-black flex items-center gap-1">
-                      <span>✓</span>
-                      <span>Eligible for Return / Replacement ({item.returnWindowDays} Days)</span>
+                    <span className="px-2.5 py-1 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-lg text-[10px] font-bold">
+                      Eligible for Return / Replacement ({item.returnWindowDays} Days)
                     </span>
                   ) : (
-                    <span className="px-2.5 py-1 bg-stone-200 text-stone-700 rounded-lg text-[10px] font-black flex items-center gap-1">
-                      <span>🚫</span>
-                      <span>Non-Returnable (Perishable)</span>
+                    <span className="px-2.5 py-1 bg-stone-100 border border-stone-200 text-stone-600 rounded-lg text-[10px] font-bold">
+                      Non-Returnable (Perishable)
                     </span>
                   )}
                 </div>
@@ -183,8 +180,8 @@ export default function OrderTrackingPage() {
         {/* GOOGLE MAPS INTEGRATION CONTAINER */}
         <div className="space-y-3 pt-2">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-bold text-stone-900 flex items-center gap-1.5">
-              <span>🗺️</span> Google Maps Fleet Telemetry (NH-66 Transit)
+            <span className="font-bold text-stone-900">
+              Google Maps Fleet Telemetry (NH-66 Transit)
             </span>
             <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-lg">
               <button
@@ -209,7 +206,7 @@ export default function OrderTrackingPage() {
                   mapLayer === 'TEMPERATURE' ? 'bg-white text-emerald-800 shadow-2xs' : 'text-stone-500'
                 }`}
               >
-                ❄️ Cold Sensor
+                Cold Sensor
               </button>
             </div>
           </div>
@@ -237,33 +234,27 @@ export default function OrderTrackingPage() {
 
             {/* Farm Origin Pin */}
             <div className="relative z-10 flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white flex items-center justify-center text-white text-xs shadow-md font-bold">
-                🥭
-              </div>
+              <div className="w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-300/40" />
               <div className="bg-stone-900/90 text-white px-3 py-1 rounded-xl text-xs font-semibold backdrop-blur-xs border border-white/20">
-                Pawas Orchards, Ratnagiri
+                Origin: Pawas Orchards, Ratnagiri
               </div>
             </div>
 
             {/* Moving Reefer Linehaul Truck Pin */}
             <div className="absolute top-[48%] left-[52%] z-20 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-              <div className="bg-amber-400 text-stone-950 px-2.5 py-1 rounded-full text-[10px] font-extrabold shadow-lg flex items-center gap-1 border border-amber-300">
-                <span>🚚 MH-08-AG-9988</span>
+              <div className="bg-amber-400 text-stone-950 px-2.5 py-1 rounded-full text-[10px] font-extrabold shadow-lg flex items-center gap-1.5 border border-amber-300">
+                <span>Reefer MH-08-AG-9988</span>
                 <span className="text-emerald-950 font-bold bg-white/60 px-1 rounded">17.2°C</span>
               </div>
-              <div className="w-9 h-9 rounded-full bg-emerald-500 border-4 border-white shadow-xl flex items-center justify-center text-white text-sm animate-bounce mt-1">
-                📍
-              </div>
+              <div className="w-3.5 h-3.5 rounded-full bg-emerald-400 ring-4 ring-emerald-300 shadow-lg mt-1.5 animate-pulse" />
             </div>
 
             {/* Customer Drop Destination Pin */}
             <div className="relative z-10 flex items-center gap-2 self-end">
               <div className="bg-stone-900/90 text-white px-3 py-1 rounded-xl text-xs font-semibold backdrop-blur-xs border border-white/20">
-                Pune 411001 (Destination)
+                Destination: Pune 411001
               </div>
-              <div className="w-8 h-8 rounded-full bg-rose-600 border-2 border-white flex items-center justify-center text-white text-xs shadow-md font-bold">
-                📍
-              </div>
+              <div className="w-4 h-4 rounded-full bg-rose-500 ring-4 ring-rose-300/40" />
             </div>
 
             <div className="relative z-10 flex justify-between items-end text-[10px] font-mono text-stone-300">
@@ -283,11 +274,11 @@ export default function OrderTrackingPage() {
             <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
               Assigned Last-Mile Executive
             </span>
-            <p className="font-bold text-stone-900 text-sm mt-0.5">Ramesh Sawant (+919811223344)</p>
-            <p className="text-stone-500">Vehicle: Electric Cargo Scooter MH-12-EV-1122</p>
+            <p className="font-bold text-stone-900 text-sm mt-0.5">Ramesh Sawant (+91 98112 23344)</p>
+            <p className="text-stone-500">Electric Cargo Scooter MH-12-EV-1122</p>
           </div>
           <div className="flex items-center gap-2">
-            <div className="px-3 py-1.5 bg-amber-100 border border-amber-300 rounded-xl text-amber-900 font-mono font-bold text-xs">
+            <div className="px-3 py-1.5 bg-amber-50 border border-amber-300 rounded-xl text-amber-950 font-mono font-bold text-xs">
               Delivery OTP: 8492
             </div>
           </div>
@@ -300,9 +291,9 @@ export default function OrderTrackingPage() {
           </p>
           <button
             onClick={() => setShowReturnModal(true)}
-            className="px-4 py-2.5 text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 rounded-xl hover:bg-rose-100 transition shrink-0"
+            className="px-4 py-2.5 text-xs font-bold text-rose-800 bg-rose-50 border border-rose-200 rounded-xl hover:bg-rose-100 transition shrink-0"
           >
-            🔄 Request Return or Replacement
+            Request Return or Replacement
           </button>
         </div>
       </div>
@@ -311,8 +302,10 @@ export default function OrderTrackingPage() {
       {showCancelNotice && (
         <div className="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-200 space-y-4">
-            <div className="flex items-center gap-2.5 text-amber-600">
-              <span className="text-2xl">🔒</span>
+            <div className="flex items-center gap-2.5 text-amber-800">
+              <span className="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-amber-100 uppercase tracking-wider">
+                Policy
+              </span>
               <h3 className="font-black text-stone-900 text-base">Admin-Controlled Cancellation</h3>
             </div>
             <p className="text-xs text-stone-600 leading-relaxed">
@@ -346,7 +339,9 @@ export default function OrderTrackingPage() {
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-stone-200">
             {returnSubmitted ? (
               <div className="text-center py-6 space-y-3">
-                <span className="text-4xl block">✅</span>
+                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm mx-auto">
+                  DONE
+                </div>
                 <h3 className="font-bold text-stone-900 text-lg">
                   {returnType === 'REPLACEMENT' ? 'Replacement Dispatched' : 'Return Request Initiated'}
                 </h3>
@@ -389,8 +384,8 @@ export default function OrderTrackingPage() {
                 {/* Eligibility Warning if item is non-returnable */}
                 {!selectedItem.isReturnable && !selectedItem.isReplaceable ? (
                   <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-900 space-y-1">
-                    <p className="font-bold flex items-center gap-1">
-                      <span>🚫</span> Item Ineligible for Return or Replacement
+                    <p className="font-bold">
+                      Item Ineligible for Return or Replacement
                     </p>
                     <p className="text-[11px] text-rose-700">
                       {selectedItem.nonReturnReason || 'This perishable produce cannot be returned per FSSAI regulations once dispatched.'}
@@ -410,7 +405,7 @@ export default function OrderTrackingPage() {
                               : 'border-stone-200 text-stone-700'
                           }`}
                         >
-                          🥭 Replacement (Send Fresh Box)
+                          Replacement (Send Fresh Box)
                         </button>
                         <button
                           type="button"
@@ -421,7 +416,7 @@ export default function OrderTrackingPage() {
                               : 'border-stone-200 text-stone-700'
                           }`}
                         >
-                          💸 Refund to Source Bank
+                          Refund to Source Bank
                         </button>
                       </div>
                     </div>
@@ -442,7 +437,7 @@ export default function OrderTrackingPage() {
                     <div>
                       <label className="block text-xs font-semibold text-stone-700 mb-1">Upload Photo Evidence</label>
                       <div className="border-2 border-dashed border-stone-300 rounded-xl p-4 text-center text-xs text-stone-500 bg-stone-50">
-                        📷 Click to attach photo of harvest batch & box
+                        Click or drag to attach photo of harvest batch & box
                       </div>
                     </div>
                   </>
