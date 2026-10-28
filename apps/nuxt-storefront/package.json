@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxt generate && node -e \"const fs=require('fs'); const src=fs.existsSync('.vercel/output/static')?'.vercel/output/static':(fs.existsSync('.output/public')?'.output/public':null); if(src){fs.rmSync('dist',{recursive:true,force:true}); fs.cpSync(src,'dist',{recursive:true}); console.log('Successfully prepared dist from '+src);}\"",
     "dev": "nuxt dev -p 3004",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
